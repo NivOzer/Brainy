@@ -1,6 +1,7 @@
 package com.example.brainy
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        val navbar: BottomNavigationView = binding.navbar
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -30,10 +31,31 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_brainy, R.id.navigation_settings
             )
         )
+
+        // Add a destination change listener to hide/show BottomNavigationView
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_brainy -> navbar.visibility = View.GONE
+                else -> navbar.visibility = View.VISIBLE
+            }
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        navbar.setupWithNavController(navController)
         enableEdgeToEdge()
         supportActionBar?.hide()
-
     }
+
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Check if the current destination is HomeFragment
+        if (navController.currentDestination?.id == R.id.navigation_home) {
+            // Exit the app if the back button is pressed on HomeFragment
+            finish()
+        } else {
+            // Otherwise, handle the back press to navigate to the previous fragment
+            super.onBackPressed()
+        }
+    }
+
 }

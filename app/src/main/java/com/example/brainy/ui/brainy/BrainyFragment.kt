@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.brainy.R
 import com.example.brainy.databinding.FragmentBrainyBinding
 
 class BrainyFragment : Fragment() {
@@ -31,6 +33,10 @@ class BrainyFragment : Fragment() {
         val textView: TextView = binding.textDashboard
         brainyViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+        }
+
+        binding.backHomeBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
         return root
     }

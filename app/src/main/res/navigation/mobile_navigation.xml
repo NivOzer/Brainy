@@ -19,7 +19,11 @@
         android:id="@+id/navigation_brainy"
         android:name="com.example.brainy.ui.brainy.BrainyFragment"
         android:label="@string/brainy"
-        tools:layout="@layout/fragment_brainy" />
+        tools:layout="@layout/fragment_brainy" >
+        <action
+            android:id="@+id/action_navigation_brainy_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
