@@ -58,7 +58,8 @@ class BrainyFragment : Fragment() {
         })
         ans1Button.setOnClickListener { checkAnswer(ans1Button.text.toString().toInt()) }
         ans2Button.setOnClickListener { checkAnswer(ans2Button.text.toString().toInt()) }
-        viewModel.generateRandomQuestion()
+        ////////////////Check Difficulty
+        viewModel.generateRandomQuestion(Difficulty.EASY)
         return root
     }
 
@@ -72,7 +73,8 @@ class BrainyFragment : Fragment() {
         } else {
             // Wrong Answer Logic
         }
-        viewModel.generateRandomQuestion()
+        ////////////////Check Difficulty
+        viewModel.generateRandomQuestion(difficulty = Difficulty.EASY)
     }
 
 
