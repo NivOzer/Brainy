@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.brainy.R
 import com.example.brainy.databinding.FragmentBrainyBinding
+import com.example.brainy.ui.shared.SharedViewModel
 
 class BrainyFragment : Fragment() {
 
@@ -25,7 +26,7 @@ class BrainyFragment : Fragment() {
     private lateinit var questionTextView: TextView
     private lateinit var ans1Button: Button
     private lateinit var ans2Button: Button
-
+    private lateinit var sharedViewModel: SharedViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +34,7 @@ class BrainyFragment : Fragment() {
     ): View {
         val brainyViewModel =
             ViewModelProvider(this).get(BrainyViewModel::class.java)
-
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         _binding = FragmentBrainyBinding.inflate(inflater, container, false)
         val root: View = binding.root
 //        val textView: TextView = binding.textDashboard
@@ -59,7 +60,34 @@ class BrainyFragment : Fragment() {
         ans1Button.setOnClickListener { checkAnswer(ans1Button.text.toString().toInt()) }
         ans2Button.setOnClickListener { checkAnswer(ans2Button.text.toString().toInt()) }
         ////////////////Check Difficulty
-        viewModel.generateRandomQuestion(Difficulty.EASY)
+        viewModel.generateRandomQuestion(Difficulty.HARD)
+
+
+        // Observe difficulty changes from SharedViewModel
+        sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
+            val difficultyLevel = when (difficulty) {
+                0 -> Difficulty.EASY
+                1 -> Difficulty.MEDIUM
+                2 -> Difficulty.HARD
+                3 -> Difficulty.EXTREME
+                else -> Difficulty.EASY
+            }
+            viewModel.generateRandomQuestion(difficultyLevel)
+        })
+
+
+
+        // Generate the initial question based on initial difficulty
+        sharedViewModel.difficulty.value?.let { difficulty ->
+            val difficultyLevel = when (difficulty) {
+                0 -> Difficulty.EASY
+                1 -> Difficulty.MEDIUM
+                2 -> Difficulty.HARD
+                3 -> Difficulty.EXTREME
+                else -> Difficulty.EASY
+            }
+            viewModel.generateRandomQuestion(difficultyLevel)
+        }
         return root
     }
 
@@ -73,8 +101,16 @@ class BrainyFragment : Fragment() {
         } else {
             // Wrong Answer Logic
         }
-        ////////////////Check Difficulty
-        viewModel.generateRandomQuestion(difficulty = Difficulty.EASY)
+        sharedViewModel.difficulty.value?.let { difficulty ->
+            val difficultyLevel = when (difficulty) {
+                0 -> Difficulty.EASY
+                1 -> Difficulty.MEDIUM
+                2 -> Difficulty.HARD
+                3 -> Difficulty.EXTREME
+                else -> Difficulty.EASY
+            }
+            viewModel.generateRandomQuestion(difficultyLevel)
+        }
     }
 
 
