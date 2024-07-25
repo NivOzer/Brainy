@@ -1,6 +1,7 @@
 package com.example.brainy
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -31,5 +32,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        enableEdgeToEdge()
+        supportActionBar?.hide()
+
     }
 }
