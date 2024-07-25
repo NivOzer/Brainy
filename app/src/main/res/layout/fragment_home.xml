@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.home.HomeFragment">
 
     <TextView
         android:id="@+id/title_tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Brainy"
         android:gravity="center"
         android:padding="32dp"
-        android:textSize="32sp"/>
+        android:text="Brainy"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:src="@drawable/brainplayimage" />
-
+        android:layout_height="150dp"
+        android:src="@drawable/brainplayimage"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
 
     <Button
         android:id="@+id/btn_start_game"
-        android:layout_width="184dp"
-        android:layout_height="74dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="start playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Start Playing"
         android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@id/highScore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"
         tools:ignore="TextSizeCheck" />
 
-    <TextView
-        android:id="@+id/highestScore_tv"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/highScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="Highest score"
-        android:textSize="15dp"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_game">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/scoresRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         />
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/highestScore_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Highest score"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/highestScore_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/highestScore_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/scoresRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

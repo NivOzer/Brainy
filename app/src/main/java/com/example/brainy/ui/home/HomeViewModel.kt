@@ -19,6 +19,16 @@ class HomeViewModel : ViewModel() {
             Score(80),
             Score(110),
             Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
+            Score(95),
             Score(70)
         ).sortedByDescending { it.value }
     }
