@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Brainy</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="home">Home</string>
+    <string name="brainy">Brainy</string>
+    <string name="settings">Settings</string>
 </resources>
