@@ -35,7 +35,7 @@
 
 <!--Game-->
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/game_card"
         android:layout_width="250dp"
         android:layout_height="500dp"
@@ -58,6 +58,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="InvalidId">
                 <TextView
+                    android:id="@+id/question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Defualt Question"
@@ -104,7 +105,7 @@
         android:id="@+id/endgame_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
