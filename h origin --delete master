@@ -1,0 +1,120 @@
+[33mcommit 741b8b4e52eeffd6f9c0f01e7076b96323294c94[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Fri Jul 26 01:17:25 2024 +0300
+
+    Logic works
+
+[33mcommit 782cc7463dc34e3210ec11a62a33c5d0d83ab7fd[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Fri Jul 26 01:15:38 2024 +0300
+
+    settings change
+
+[33mcommit 9c3c80206dbbc6d80d835d1a040a6c4eee09730f[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Fri Jul 26 01:08:03 2024 +0300
+
+    changes
+
+[33mcommit 5032bd043f48a722bf38cbae0ccb781fc5783080[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Fri Jul 26 00:55:23 2024 +0300
+
+    Improved generate question function
+
+[33mcommit dd9fded81a08c266431a35b5f12e6218b9e3b856[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Fri Jul 26 00:23:32 2024 +0300
+
+    Scrollable push
+
+[33mcommit 6d8aae414a71eb41a359f409f78ec816bd5d14bc[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 23:42:01 2024 +0300
+
+    Random Questions Working
+
+[33mcommit efe5a33107e0cd950c1f1a94edb458c1c908f83b[m
+Author: amitSan78 <amit.sanduri@gmail.com>
+Date:   Thu Jul 25 23:39:44 2024 +0300
+
+    added scores in recycleView and Adapter
+
+[33mcommit d2d12c54952958879bd3b58cb29e5eccb0383e50[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 23:14:43 2024 +0300
+
+    No duplicate fragments
+    removed navbar in BrainyFragment
+
+[33mcommit 500c6f48466c1b564b0a24bb1057d934823bd2d5[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 22:56:56 2024 +0300
+
+    push
+
+[33mcommit 5809a5eeb9ac86947dc7e2fb71074bae4a4aa9c5[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 22:31:57 2024 +0300
+
+    Working
+
+[33mcommit 51a61121b8096740915f6599f049b54052e04d5d[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 21:39:09 2024 +0300
+
+    Layout redesign finish
+
+[33mcommit 50e89d7532c0eb20106b29e10937ab344a41f883[m
+Author: einavkogut <einav.kogut123@gmail.com>
+Date:   Thu Jul 25 21:26:57 2024 +0300
+
+    home layout update
+
+[33mcommit 7b047748ad5518c5e4e8be996474a0354f6a1bac[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 21:23:05 2024 +0300
+
+    Brainy Layout Update
+
+[33mcommit cc1e21958212074fe46f37e890de5adc0ab527f1[m
+Author: amitSan78 <amit.sanduri@gmail.com>
+Date:   Thu Jul 25 21:15:21 2024 +0300
+
+    added settings page, sliders for difficulties
+
+[33mcommit b1e55bc72f52d30553f3327974b062865288b478[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 20:25:20 2024 +0300
+
+    Clean slate
+
+[33mcommit eae296c060b1abd6cbdda00b606d923c80ee3c84[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 19:58:43 2024 +0300
+
+    Renaming
+
+[33mcommit afc48e84c52ff8d5ebd6eb08ab403cdbaf2030aa[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 19:45:03 2024 +0300
+
+    menu strings changed
+
+[33mcommit a545390f0c03090c3a11975faedab6c8f1d9380e[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 19:39:27 2024 +0300
+
+    Actionbar removed + enabled edge to edge
+
+[33mcommit 7d04a58f99914063b21f00a830a8f7b7699260af[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 19:10:01 2024 +0300
+
+    TestCommit
+
+[33mcommit e75bcd97e3d3d3a12bbd638d0cb157c86f6afc69[m
+Author: Niv Ozer <niv.ozer@yahoo.com>
+Date:   Thu Jul 25 19:03:55 2024 +0300
+
+    initial commit
