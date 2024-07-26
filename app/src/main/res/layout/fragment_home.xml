@@ -46,10 +46,10 @@
         tools:ignore="TextSizeCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="8dp"
         android:id="@+id/highScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_start_game">
 
         <TextView
@@ -59,13 +59,14 @@
             android:gravity="center"
             android:text="Highest score"
             android:textSize="15dp"
+            android:padding="16dp"
             app:layout_constraintBottom_toTopOf="@+id/highestScore_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/highestScore_layout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

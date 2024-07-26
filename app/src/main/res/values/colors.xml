@@ -17,7 +17,7 @@
     <color name="text_color">#4A4A4A</color>
 
     <!-- App palette Night -->
-    <color name="primary_color_night">#1A3A5B</color>
+    <color name="primary_color_night">#ffe0e0</color>
     <color name="primary_variant_night">#142A42</color>
     <color name="secondary_color_night">#B3811C</color>
     <color name="secondary_variant_night">#8F6516</color>

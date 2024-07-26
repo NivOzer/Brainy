@@ -3,15 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:background="@drawable/score_item_shape"
+    android:layout_margin="4dp"
+    android:padding="12dp">
 
+    <TextView
+        android:id="@+id/palyers_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Player name:"/>
     <TextView
         android:id="@+id/score_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:textSize="16sp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:tint="@color/secondary_color"
+        android:src="@drawable/star_icon"/>
 
 
 

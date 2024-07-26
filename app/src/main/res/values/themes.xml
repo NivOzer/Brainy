@@ -15,6 +15,7 @@
         <!-- Customize your theme here. -->
         <item name="android:background">@color/background_color</item>
         <item name="android:textColor">@color/text_color</item>
+        <item name="android:thumbTint">@color/primary_color</item>
     </style>
 
 
