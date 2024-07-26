@@ -15,10 +15,12 @@ class SettingsViewModel : ViewModel() {
         value = 0 // Default to Easy
     }
     val difficulty: LiveData<Int> = _difficulty
-
     fun setDifficulty(newDifficulty: Int) {
         _difficulty.value = newDifficulty
     }
+
+
+
     private val _timeDifficulty = MutableLiveData<Int>().apply {
         value = 0 // Default to 20 sec
     }

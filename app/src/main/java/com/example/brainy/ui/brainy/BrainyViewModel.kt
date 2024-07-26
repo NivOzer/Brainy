@@ -49,10 +49,8 @@ class BrainyViewModel : ViewModel() {
 
         val question = "What is $num1 $operator $num2?"
         _currentQuestion.value = MathQuestion(question, correctAnswer, wrongAnswer)
+
     }
-
-
-
     private fun generateNumbers(difficulty: Difficulty): Pair<Int, Int> {
         return when (difficulty) {
             Difficulty.EASY -> Pair(Random.nextInt(1, 10), Random.nextInt(1, 10))

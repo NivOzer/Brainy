@@ -20,36 +20,54 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         setupDifficultySlider()
-
+        setupTimeDifficultySlider()
         return root
     }
 
     private fun setupDifficultySlider() {
         val difficulties = listOf("Easy", "Medium", "Hard", "Extreme")
-
         binding.difficultySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val difficultyText = "Difficulty: ${difficulties[progress]}"
                 binding.difficultyText.text = difficultyText
                 sharedViewModel.setDifficulty(progress)
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
-
         // Set initial difficulty from SharedViewModel
         sharedViewModel.difficulty.observe(viewLifecycleOwner) { difficulty ->
             binding.difficultySeekBar.progress = difficulty
             binding.difficultyText.text = "Difficulty: ${difficulties[difficulty]}"
         }
     }
+
+    private fun setupTimeDifficultySlider() {
+        val times = listOf(20, 15, 10, 5)
+        binding.TimedifficultySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val time = times[progress]
+                sharedViewModel.setTimeDifficulty(time)
+                binding.difficultyTimeText.text = "Time Difficulty: $time sec"
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+        // Set initial time difficulty from SharedViewModel
+        sharedViewModel.timeDifficulty.observe(viewLifecycleOwner) { time ->
+            val progress = times.indexOf(time)
+            binding.TimedifficultySeekBar.progress = progress
+            binding.difficultyTimeText.text = "Time Difficulty: $time sec"
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
