@@ -51,8 +51,6 @@ class BrainyFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
         binding.playAgainBtn.setOnClickListener {
-            binding.game.visibility = View.VISIBLE
-            binding.endgameLayout.visibility = View.GONE
             restartGame()
         }
 
@@ -65,14 +63,16 @@ class BrainyFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        
+        sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
+            viewModel.generateRandomQuestion(getDifficultyLevel(difficulty))
+        })
+
         viewModel.currentQuestion.observe(viewLifecycleOwner, Observer { mathQuestion ->
             updateQuestionUI(mathQuestion)
             startTimer() // Start the timer for each new question
         })
 
-        sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
-            viewModel.generateRandomQuestion(getDifficultyLevel(difficulty))
-        })
 
         sharedViewModel.timeDifficulty.observe(viewLifecycleOwner, Observer { time ->
             timeLeftInMillis = time * 1000L
@@ -145,7 +145,7 @@ class BrainyFragment : Fragment() {
     }
 
     private fun restartGame() {
-        binding.gameCard.visibility = View.VISIBLE
+        binding.game.visibility = View.VISIBLE
         binding.endgameLayout.visibility = View.GONE
         generateNextQuestion()
     }
