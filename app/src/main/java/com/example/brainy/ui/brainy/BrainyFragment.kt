@@ -20,7 +20,6 @@ class BrainyFragment : Fragment() {
     private var _binding: FragmentBrainyBinding? = null
     private val binding get() = _binding!!
 
-    // View models
     private lateinit var viewModel: BrainyViewModel
     private lateinit var sharedViewModel: SharedViewModel
 
@@ -44,52 +43,40 @@ class BrainyFragment : Fragment() {
         initializeUI()
         setupObservers()
 
-
-        binding.backHomeBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
-        }
-
         return root
     }
 
     private fun initializeUI() {
+        binding.backHomeBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
+        }
+
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
         ans2Button = binding.ans2Btn
+
         ans1Button.setOnClickListener { checkAnswer(ans1Button.text.toString().toInt()) }
         ans2Button.setOnClickListener { checkAnswer(ans2Button.text.toString().toInt()) }
     }
 
     private fun setupObservers() {
         viewModel.currentQuestion.observe(viewLifecycleOwner, Observer { mathQuestion ->
-            questionTextView.text = mathQuestion.question
-            val answers = listOf(mathQuestion.correctAnswer, mathQuestion.wrongAnswer).shuffled()
-            ans1Button.text = answers[0].toString()
-            ans2Button.text = answers[1].toString()
+            updateQuestionUI(mathQuestion)
             startTimer() // Start the timer for each new question
         })
 
         sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
-            val difficultyLevel = when (difficulty) {
-                0 -> Difficulty.EASY
-                1 -> Difficulty.MEDIUM
-                2 -> Difficulty.HARD
-                3 -> Difficulty.EXTREME
-                else -> Difficulty.EASY
-            }
-            viewModel.generateRandomQuestion(difficultyLevel)
+            viewModel.generateRandomQuestion(getDifficultyLevel(difficulty))
         })
 
         sharedViewModel.timeDifficulty.observe(viewLifecycleOwner, Observer { time ->
-            if (time != null) {
-                timeLeftInMillis = time * 1000L
-                startTimer()
-            }
+            timeLeftInMillis = time * 1000L
         })
     }
 
     private fun startTimer() {
         cancelTimer()
+        timeLeftInMillis = sharedViewModel.timeDifficulty.value?.times(1000L) ?: 20000L // Reset time
         initializeTimer()
         countdownTimer?.start()
     }
@@ -119,16 +106,24 @@ class BrainyFragment : Fragment() {
     private fun checkAnswer(selectedAnswer: Int) {
         if (selectedAnswer == viewModel.currentQuestion.value?.correctAnswer) {
             // Correct Answer Logic
-
-            viewModel.generateRandomQuestion(getCurrentDifficulty())
+            generateNextQuestion()
         } else {
             // Wrong Answer Logic
             gameOver()
         }
     }
 
+    private fun generateNextQuestion() {
+        viewModel.generateRandomQuestion(getCurrentDifficulty())
+        startTimer() // Reset timer for the next question
+    }
+
     private fun getCurrentDifficulty(): Difficulty {
-        return when (sharedViewModel.difficulty.value) {
+        return getDifficultyLevel(sharedViewModel.difficulty.value)
+    }
+
+    private fun getDifficultyLevel(difficulty: Int?): Difficulty {
+        return when (difficulty) {
             0 -> Difficulty.EASY
             1 -> Difficulty.MEDIUM
             2 -> Difficulty.HARD
@@ -137,8 +132,15 @@ class BrainyFragment : Fragment() {
         }
     }
 
+    private fun updateQuestionUI(mathQuestion: MathQuestion) {
+        questionTextView.text = mathQuestion.question
+        val answers = listOf(mathQuestion.correctAnswer, mathQuestion.wrongAnswer).shuffled()
+        ans1Button.text = answers[0].toString()
+        ans2Button.text = answers[1].toString()
+    }
+
     private fun gameOver() {
-        binding.game.visibility = View.GONE
+        binding.gameCard.visibility = View.GONE
         binding.endgameLayout.visibility = View.VISIBLE
         cancelTimer()
     }
