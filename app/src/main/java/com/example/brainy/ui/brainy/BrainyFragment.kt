@@ -45,7 +45,7 @@ class BrainyFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
 
-
+//The first time the app runs you cant press anything
 
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
