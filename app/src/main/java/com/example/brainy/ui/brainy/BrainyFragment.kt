@@ -50,6 +50,11 @@ class BrainyFragment : Fragment() {
         binding.backHomeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
+        binding.playAgainBtn.setOnClickListener {
+            binding.game.visibility = View.VISIBLE
+            binding.endgameLayout.visibility = View.GONE
+            restartGame()
+        }
 
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
@@ -95,7 +100,7 @@ class BrainyFragment : Fragment() {
     }
 
     private fun updateTimerText() {
-        val secondsLeft = (timeLeftInMillis / 1000).toInt()
+        val secondsLeft = (timeLeftInMillis / 1000).toInt() +1
         binding.timerTv.text = "Time: $secondsLeft"
     }
 
@@ -139,8 +144,14 @@ class BrainyFragment : Fragment() {
         ans2Button.text = answers[1].toString()
     }
 
+    private fun restartGame() {
+        binding.gameCard.visibility = View.VISIBLE
+        binding.endgameLayout.visibility = View.GONE
+        generateNextQuestion()
+    }
+
     private fun gameOver() {
-        binding.gameCard.visibility = View.GONE
+        binding.game.visibility = View.GONE
         binding.endgameLayout.visibility = View.VISIBLE
         cancelTimer()
     }
