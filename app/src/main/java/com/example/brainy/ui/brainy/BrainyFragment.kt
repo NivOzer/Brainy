@@ -46,7 +46,7 @@ class BrainyFragment : Fragment() {
         }
 
 //The first time the app runs you cant press anything
-
+val a = 1
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
         ans2Button = binding.ans2Btn
