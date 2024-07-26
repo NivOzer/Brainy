@@ -10,7 +10,17 @@
 
     <!-- App palette -->
     <color name="primary_color">#4A90E2</color>
+    <color name="primary_variant">#3A70B2</color>
     <color name="secondary_color">#F5A623</color>
+    <color name="secondary_variant">#C5891B</color>
     <color name="background_color">#f7f7f7</color>
     <color name="text_color">#4A4A4A</color>
+
+    <!-- App palette Night -->
+    <color name="primary_color_night">#1A3A5B</color>
+    <color name="primary_variant_night">#142A42</color>
+    <color name="secondary_color_night">#B3811C</color>
+    <color name="secondary_variant_night">#8F6516</color>
+    <color name="background_color_night">#121212</color>
+    <color name="text_color_night">#E0E0E0</color>
 </resources>
