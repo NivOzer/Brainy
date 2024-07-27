@@ -26,12 +26,10 @@ class BrainyViewModel : ViewModel() {
 
     private val operators = listOf("+", "-", "*", "/")
     fun generateRandomQuestion(difficulty: Difficulty) {
-
         var num1: Int
         var num2: Int
         var operator: String
         var correctAnswer: Int
-
         do {
             val numbers = generateNumbers(difficulty)
             num1 = numbers.first

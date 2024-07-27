@@ -47,17 +47,17 @@ class BrainyFragment : Fragment() {
     }
 
     private fun initializeUI() {
+        //local onclick listeners
         binding.backHomeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
         binding.playAgainBtn.setOnClickListener {
             restartGame()
         }
-
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
         ans2Button = binding.ans2Btn
-
+        //if a button is pressed check its answer
         ans1Button.setOnClickListener { checkAnswer(ans1Button.text.toString().toInt()) }
         ans2Button.setOnClickListener { checkAnswer(ans2Button.text.toString().toInt()) }
     }
@@ -67,16 +67,16 @@ class BrainyFragment : Fragment() {
         sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
             viewModel.generateRandomQuestion(getDifficultyLevel(difficulty))
         })
+        sharedViewModel.timeDifficulty.observe(viewLifecycleOwner, Observer { time ->
+            timeLeftInMillis = time * 1000L
+        })
+
 
         viewModel.currentQuestion.observe(viewLifecycleOwner, Observer { mathQuestion ->
             updateQuestionUI(mathQuestion)
             startTimer() // Start the timer for each new question
         })
 
-
-        sharedViewModel.timeDifficulty.observe(viewLifecycleOwner, Observer { time ->
-            timeLeftInMillis = time * 1000L
-        })
     }
 
     private fun startTimer() {
@@ -139,11 +139,13 @@ class BrainyFragment : Fragment() {
 
     private fun updateQuestionUI(mathQuestion: MathQuestion) {
         questionTextView.text = mathQuestion.question
+        //randomizes it so its not only on one side
         val answers = listOf(mathQuestion.correctAnswer, mathQuestion.wrongAnswer).shuffled()
         ans1Button.text = answers[0].toString()
         ans2Button.text = answers[1].toString()
     }
 
+    //This just generates a new question for now
     private fun restartGame() {
         binding.game.visibility = View.VISIBLE
         binding.endgameLayout.visibility = View.GONE

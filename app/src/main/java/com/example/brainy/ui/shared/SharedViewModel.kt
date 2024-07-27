@@ -18,7 +18,7 @@ class SharedViewModel : ViewModel() {
         _timeDifficulty.value = 20
     }
 
-
+    //Setters
     fun setDifficulty(level: Int) {
         _difficulty.value = level
     }
