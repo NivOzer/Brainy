@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.brainy.databinding.FragmentSettingsBinding
@@ -28,6 +29,15 @@ class SettingsFragment : Fragment() {
 
         setupDifficultySlider()
         setupTimeDifficultySlider()
+
+        binding.nightModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
         return root
     }
 
