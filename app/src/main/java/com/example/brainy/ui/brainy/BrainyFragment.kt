@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.brainy.R
 import com.example.brainy.databinding.FragmentBrainyBinding
 import com.example.brainy.ui.shared.SharedViewModel
+import com.example.brainy.ui.home.HomeViewModel
+import com.example.brainy.ui.score.Score
 
 class BrainyFragment : Fragment() {
 
@@ -22,6 +24,7 @@ class BrainyFragment : Fragment() {
 
     private lateinit var viewModel: BrainyViewModel
     private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var homeViewModel: HomeViewModel
 
     private lateinit var questionTextView: TextView
     private lateinit var ans1Button: Button
@@ -37,6 +40,7 @@ class BrainyFragment : Fragment() {
     ): View {
         viewModel = ViewModelProvider(this).get(BrainyViewModel::class.java)
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         _binding = FragmentBrainyBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -47,7 +51,6 @@ class BrainyFragment : Fragment() {
     }
 
     private fun initializeUI() {
-        //local onclick listeners
         binding.backHomeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_brainy_to_navigation_home)
         }
@@ -57,13 +60,11 @@ class BrainyFragment : Fragment() {
         questionTextView = binding.question
         ans1Button = binding.ans1Btn
         ans2Button = binding.ans2Btn
-        //if a button is pressed check its answer
         ans1Button.setOnClickListener { checkAnswer(ans1Button.text.toString().toInt()) }
         ans2Button.setOnClickListener { checkAnswer(ans2Button.text.toString().toInt()) }
     }
 
     private fun setupObservers() {
-        
         sharedViewModel.difficulty.observe(viewLifecycleOwner, Observer { difficulty ->
             viewModel.generateRandomQuestion(getDifficultyLevel(difficulty))
         })
@@ -71,17 +72,15 @@ class BrainyFragment : Fragment() {
             timeLeftInMillis = time * 1000L
         })
 
-
         viewModel.currentQuestion.observe(viewLifecycleOwner, Observer { mathQuestion ->
             updateQuestionUI(mathQuestion)
-            startTimer() // Start the timer for each new question
+            startTimer()
         })
-
     }
 
     private fun startTimer() {
         cancelTimer()
-        timeLeftInMillis = sharedViewModel.timeDifficulty.value?.times(1000L) ?: 20000L // Reset time
+        timeLeftInMillis = sharedViewModel.timeDifficulty.value?.times(1000L) ?: 20000L
         initializeTimer()
         countdownTimer?.start()
     }
@@ -100,7 +99,7 @@ class BrainyFragment : Fragment() {
     }
 
     private fun updateTimerText() {
-        val secondsLeft = (timeLeftInMillis / 1000).toInt() +1
+        val secondsLeft = (timeLeftInMillis / 1000).toInt() + 1
         binding.timerTv.text = "Time: $secondsLeft"
     }
 
@@ -110,17 +109,16 @@ class BrainyFragment : Fragment() {
 
     private fun checkAnswer(selectedAnswer: Int) {
         if (selectedAnswer == viewModel.currentQuestion.value?.correctAnswer) {
-            // Correct Answer Logic
+            viewModel.incrementCorrectAnswers()
             generateNextQuestion()
         } else {
-            // Wrong Answer Logic
             gameOver()
         }
     }
 
     private fun generateNextQuestion() {
         viewModel.generateRandomQuestion(getCurrentDifficulty())
-        startTimer() // Reset timer for the next question
+        startTimer()
     }
 
     private fun getCurrentDifficulty(): Difficulty {
@@ -139,16 +137,15 @@ class BrainyFragment : Fragment() {
 
     private fun updateQuestionUI(mathQuestion: MathQuestion) {
         questionTextView.text = mathQuestion.question
-        //randomizes it so its not only on one side
         val answers = listOf(mathQuestion.correctAnswer, mathQuestion.wrongAnswer).shuffled()
         ans1Button.text = answers[0].toString()
         ans2Button.text = answers[1].toString()
     }
 
-    //This just generates a new question for now
     private fun restartGame() {
         binding.game.visibility = View.VISIBLE
         binding.endgameLayout.visibility = View.GONE
+        viewModel.resetCorrectAnswers()
         generateNextQuestion()
     }
 
@@ -156,6 +153,48 @@ class BrainyFragment : Fragment() {
         binding.game.visibility = View.GONE
         binding.endgameLayout.visibility = View.VISIBLE
         cancelTimer()
+
+        val difficulty = getDifficultyString(sharedViewModel.difficulty.value ?: 0)
+        val time = sharedViewModel.timeDifficulty.value ?: 20
+        val correctAnswers = viewModel.correctAnswers
+
+        val score = calculateScore(difficulty, time, correctAnswers)
+
+
+        // Update the score TextView
+        binding.scoreTv.text = "Your score is: $score"
+
+        homeViewModel.addScore(score, difficulty, time)
+    }
+
+    private fun getDifficultyString(difficultyValue: Int): String {
+        return when (difficultyValue) {
+            0 -> "EASY"
+            1 -> "MEDIUM"
+            2 -> "HARD"
+            3 -> "EXTREME"
+            else -> "EASY"
+        }
+    }
+
+    private fun calculateScore(difficulty: String, time: Int, correctAnswers: Int): Int {
+        val difficultyMultiplier = when (difficulty) {
+            "EASY" -> 1
+            "MEDIUM" -> 2
+            "HARD" -> 3
+            "EXTREME" -> 4
+            else -> 1
+        }
+
+        val timeMultiplier = when (time) {
+            20 -> 1
+            15 -> 2
+            10 -> 3
+            5 -> 4
+            else -> 1
+        }
+
+        return correctAnswers * difficultyMultiplier * timeMultiplier
     }
 
     override fun onDestroyView() {

@@ -10,21 +10,20 @@ data class MathQuestion(
     val correctAnswer: Int,
     val wrongAnswer: Int
 )
+
 enum class Difficulty {
     EASY, MEDIUM, HARD, EXTREME
 }
+
 class BrainyViewModel : ViewModel() {
-
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is dashboard Fragment"
-//    }
-//    val text: LiveData<String> = _text
-
     private val _currentQuestion = MutableLiveData<MathQuestion>()
     val currentQuestion: LiveData<MathQuestion> get() = _currentQuestion
 
+    var correctAnswers = 0
+        private set
 
     private val operators = listOf("+", "-", "*", "/")
+
     fun generateRandomQuestion(difficulty: Difficulty) {
         var num1: Int
         var num2: Int
@@ -38,7 +37,6 @@ class BrainyViewModel : ViewModel() {
             correctAnswer = calculateAnswer(num1, num2, operator)
         } while (operator == "/" && num1 % num2 != 0) // Ensure the division results in a whole number
 
-
         // Generate a wrong answer ensuring it's different from the correct one
         var wrongAnswer: Int
         do {
@@ -47,8 +45,8 @@ class BrainyViewModel : ViewModel() {
 
         val question = "What is $num1 $operator $num2?"
         _currentQuestion.value = MathQuestion(question, correctAnswer, wrongAnswer)
-
     }
+
     private fun generateNumbers(difficulty: Difficulty): Pair<Int, Int> {
         return when (difficulty) {
             Difficulty.EASY -> Pair(Random.nextInt(1, 10), Random.nextInt(1, 10))
@@ -57,6 +55,7 @@ class BrainyViewModel : ViewModel() {
             Difficulty.EXTREME -> Pair(Random.nextInt(100, 500), Random.nextInt(1, 100))
         }
     }
+
     private fun selectOperator(difficulty: Difficulty): String {
         return when (difficulty) {
             Difficulty.EASY -> operators[Random.nextInt(0, 2)] // +, -
@@ -64,6 +63,7 @@ class BrainyViewModel : ViewModel() {
             Difficulty.HARD, Difficulty.EXTREME -> operators[Random.nextInt(0, 4)] // +, -, *, /
         }
     }
+
     private fun calculateAnswer(num1: Int, num2: Int, operator: String): Int {
         return when (operator) {
             "+" -> num1 + num2
@@ -74,5 +74,11 @@ class BrainyViewModel : ViewModel() {
         }
     }
 
+    fun incrementCorrectAnswers() {
+        correctAnswers++
+    }
 
+    fun resetCorrectAnswers() {
+        correctAnswers = 0
+    }
 }
