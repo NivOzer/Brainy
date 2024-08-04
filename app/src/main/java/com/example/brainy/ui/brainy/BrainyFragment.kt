@@ -160,6 +160,7 @@ class BrainyFragment : Fragment() {
 
         val score = calculateScore(difficulty, time, correctAnswers)
 
+//        mongodb+srv://nivoz:<password>@cluster0.enr1wwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
         // Update the score TextView
         binding.scoreTv.text = "Your score is: $score"

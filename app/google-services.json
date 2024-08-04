@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934497428120",
+    "project_id": "brainy-21473",
+    "storage_bucket": "brainy-21473.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934497428120:android:f63eeb7cc7c6ee5a4926ed",
+        "android_client_info": {
+          "package_name": "com.example.brainy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJdiOTKUyV49DIArRk5T4R42-lXobRI9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
