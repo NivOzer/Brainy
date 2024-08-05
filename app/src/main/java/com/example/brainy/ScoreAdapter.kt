@@ -22,7 +22,7 @@ class ScoreAdapter : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val score = scores[position]
-        holder.scoreTextView.text = "Score: ${score.value}, Difficulty: ${score.difficulty}, Time: ${score.time}s"
+        holder.scoreTextView.text = "${score.value}"
     }
 
     override fun getItemCount() = scores.size
