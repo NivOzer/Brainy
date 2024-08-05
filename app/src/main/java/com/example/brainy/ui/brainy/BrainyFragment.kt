@@ -17,10 +17,17 @@ import com.example.brainy.ui.shared.SharedViewModel
 import com.example.brainy.ui.home.HomeViewModel
 import com.example.brainy.ui.score.Score
 
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.firestore.FirebaseFirestore
+
 class BrainyFragment : Fragment() {
 
     private var _binding: FragmentBrainyBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var firestore: FirebaseFirestore
 
     private lateinit var viewModel: BrainyViewModel
     private lateinit var sharedViewModel: SharedViewModel
@@ -38,6 +45,11 @@ class BrainyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Initialize Firebase Analytics
+        firebaseAnalytics = FirebaseAnalytics.getInstance(requireContext())
+        // Initialize Firestore
+        firestore = FirebaseFirestore.getInstance()
+
         viewModel = ViewModelProvider(this).get(BrainyViewModel::class.java)
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
@@ -160,7 +172,25 @@ class BrainyFragment : Fragment() {
 
         val score = calculateScore(difficulty, time, correctAnswers)
 
-//        mongodb+srv://nivoz:<password>@cluster0.enr1wwi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        // Prepare score data for Firestore
+        val scoreData = hashMapOf(
+            "score" to score
+        )
+
+        // Log the score data to verify its contents
+        println("Score Data: $scoreData")
+
+        // Add score to Firestore
+        firestore.collection("scores")
+            .add(scoreData)
+            .addOnSuccessListener { documentReference ->
+                // Successfully added
+                println("DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                // Failed to add
+                println("Error adding document: ${e.message}")
+            }
 
         // Update the score TextView
         binding.scoreTv.text = "Your score is: $score"
