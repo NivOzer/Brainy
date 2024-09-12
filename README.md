@@ -1,6 +1,6 @@
 ## Brainy - Pracice your brain in a fun way!
 a mobile application designed to enhance mathematics and cognitive skills through various brain-training exercises and activities.
-
+This project was built using Kotlin in Android Studio.
 ## Showcase
 <div style="display: flex;">
   <img src="https://github.com/user-attachments/assets/06fd07f9-5016-4926-80f4-3542a5ebe1ee" width="30%">
