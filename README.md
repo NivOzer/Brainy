@@ -10,21 +10,20 @@ a mobile application designed to enhance mathematics and cognitive skills throug
 
 ## Features
 
-- **User Profile Management**: Users can create and manage their profiles.
-- **Invite Friends**: Users can invite friends to join the app.
-- **Submit Feedback**: Users can submit feedback about the app.
-- **Dark Mode**: Supports dark mode for a better user experience in low-light environments.
+- **Difficulty**: Categorizes questions based on difficulty level.
+- **Time Difficulty**: Sets the time taken to answer each question.
+- **Leaderboard**: Displays the top scores on the main page.
+- **Dark Mode**: Provides a dark theme option for a better user experience in low-light environments.
 
 ## Screens
 
-### SettingScreenCustomer
-
+### Main Screen
+This screen shows the score leaderboard and has a button to start playing for yourself
+### Brainy - Game screen
+This screen is the game itself , you can play and once you lose your score wil be updated in the database and a modal will pop for you to play again or go see your score
+### Settings Screen
 This screen allows users to manage their settings, invite friends, get help and support, and submit feedback.
 
-#### Components
-
-- **Pressable Buttons**: For inviting friends, getting help and support, and submitting feedback.
-- **Dark Mode Toggle**: Allows users to switch between light and dark modes.
 
 ## Installation
 
