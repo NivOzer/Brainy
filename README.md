@@ -1,6 +1,12 @@
-# Brainy
+## Brainy - Pracice your brain in a fun way!
+a mobile application designed to enhance mathematics and cognitive skills through various brain-training exercises and activities.
 
-Brainy is a mobile application designed to enhance cognitive skills through various brain-training exercises and activities.
+## Showcase
+<div style="display: flex;">
+  <img src="https://github.com/user-attachments/assets/06fd07f9-5016-4926-80f4-3542a5ebe1ee" width="30%">
+  <img src="https://github.com/user-attachments/assets/02e563f4-c349-4e3b-8dbb-7a7bc788743f" width="30%">
+  <img src="https://github.com/user-attachments/assets/bb68e574-dd39-46b3-92cd-a459aae0fb7e" width="30%">
+</div>
 
 ## Features
 
